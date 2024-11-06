@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monigote en Círculo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #circle {
+            position: relative;
+            width: 400px; /* Diámetro del círculo */
+            height: 400px; /* Diámetro del círculo */
+            border: 5px solid blue; /* Borde del círculo */
+            border-radius: 50%; /* Hace que sea un círculo */
+            overflow: hidden; /* Oculta cualquier contenido que se salga del círculo */
+        }
+
+        #monigote {
+            position: absolute;
+            width: 40px; /* Tamaño del monigote */
+            height: 40px; /* Tamaño del monigote */
+            background-color: red; /* Color del monigote */
+            border-radius: 50%; /* Forma redonda para el monigote */
+        }
+
+        button {
+            position: fixed;
+            top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="startButton">DALE</button>
+    <div id="circle">
+        <div id="monigote"></div>
+    </div>
+
+    <script>
+        const monigote = document.getElementById('monigote');
+        const startButton = document.getElementById('startButton');
+        const circle = document.getElementById('circle');
+
+        startButton.addEventListener('click', () => {
+            monigote.style.display = 'block'; // Muestra el monigote
+            moveMonigote(); // Llama a la función para mover al monigote
+        });
+
+        function moveMonigote() {
+            const radius = circle.offsetWidth / 2 - 20; // Radio del círculo menos el tamaño del monigote
+            const centerX = circle.offsetWidth / 2; // Centro X del círculo
+            const centerY = circle.offsetHeight / 2; // Centro Y del círculo
+
+            // Mueve el monigote rápidamente
+            setInterval(() => {
+                // Genera un ángulo aleatorio
+                const angle = Math.random() * 2 * Math.PI;
+                // Calcula la nueva posición usando coordenadas polares
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+
+                monigote.style.left = x - 20 + 'px'; // Ajusta la posición X
+                monigote.style.top = y - 20 + 'px'; // Ajusta la posición Y
+            }, 100); // Cambia cada 100ms
+        }
+    </script>
+</body>
+</html>
